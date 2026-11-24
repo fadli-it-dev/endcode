@@ -1,0 +1,496 @@
+<!-- Smart Protected by 鳷敏鉹FadliGanz眀个 -->
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeVault — Source Code & Folder Encoder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+/* Smart Protected by 广胳廗FadliGanz剺魃 */
+tailwind['\x63\x6f\x6e\x66\x69\x67'] = {
+    '\x64\x61\x72\x6b\x4d\x6f\x64\x65': '\x63\x6c\x61\x73\x73',
+    '\x74\x68\x65\x6d\x65': {
+        '\x65\x78\x74\x65\x6e\x64': {
+            '\x66\x6f\x6e\x74\x46\x61\x6d\x69\x6c\x79': {
+                '\x73\x61\x6e\x73': [
+                    '\x49\x6e\x74\x65\x72',
+                    '\x73\x61\x6e\x73\x2d\x73\x65\x72\x69\x66'
+                ],
+                '\x6d\x6f\x6e\x6f': [
+                    '\x22JetBrains\x20Mono\x22',
+                    '\x6d\x6f\x6e\x6f\x73\x70\x61\x63\x65'
+                ]
+            }
+        }
+    }
+};
+</script>
+    <style>
+        body {
+            background-color: #070709;
+            color: #fafafa;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Flowing Aurora Mesh Blobs */
+        @keyframes floatBlob1 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(60px, -40px) scale(1.15); }
+            66% { transform: translate(-40px, 30px) scale(0.95); }
+        }
+        @keyframes floatBlob2 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(-70px, 40px) scale(1.1); }
+            66% { transform: translate(50px, -30px) scale(0.9); }
+        }
+        .blob-1 { animation: floatBlob1 14s ease-in-out infinite; }
+        .blob-2 { animation: floatBlob2 18s ease-in-out infinite; }
+
+        /* Architectural Grid + Interactive Cursor Reveal */
+        .bg-grid-base {
+            background-size: 48px 48px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        .bg-grid-highlight {
+            background-size: 48px 48px;
+            background-image: 
+                linear-gradient(to right, rgba(139, 92, 246, 0.25) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(59, 130, 246, 0.25) 1px, transparent 1px);
+            mask-image: radial-gradient(320px circle at var(--cursor-x, 50%) var(--cursor-y, 30%), black 0%, transparent 100%);
+            -webkit-mask-image: radial-gradient(320px circle at var(--cursor-x, 50%) var(--cursor-y, 30%), black 0%, transparent 100%);
+        }
+
+        /* Animated Text Shimmer */
+        @keyframes textShimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animate-text-shimmer {
+            background: linear-gradient(110deg, #ffffff 20%, #a5b4fc 40%, #ffffff 60%, #71717a 80%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmer 5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background-color: #818cf8;
+            vertical-align: middle;
+            margin-left: 3px;
+            animation: blink 0.9s infinite;
+        }
+
+        /* Card Mouse Spotlight */
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 45%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .spotlight-card:hover::before { opacity: 1; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-enter {
+            opacity: 0;
+            animation: fadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Shake animation for wrong PIN */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .animate-shake { animation: shake 0.35s ease-in-out; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #070709; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white relative">
+
+    <!-- RICH ANIMATED BACKGROUND -->
+    <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-[#070709]">
+        <div class="blob-1 absolute -top-24 left-[12%] w-[520px] h-[520px] rounded-full bg-indigo-600/20 blur-[110px]"></div>
+        <div class="blob-2 absolute top-[25%] right-[10%] w-[480px] h-[480px] rounded-full bg-blue-600/15 blur-[110px]"></div>
+        <div class="absolute inset-0 bg-grid-base"></div>
+        <div id="gridHighlight" class="absolute inset-0 bg-grid-highlight"></div>
+        <canvas id="bgCanvas" class="w-full h-full"></canvas>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#070709]/30 via-transparent to-[#070709]/95"></div>
+    </div>
+
+    <!-- MODERN FLOATING PILL NAVBAR -->
+    <div class="sticky top-4 z-40 px-4 sm:px-6">
+        <nav class="max-w-5xl mx-auto h-14 px-4 sm:px-5 rounded-2xl bg-zinc-900/75 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)] flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-blue-500 flex items-center justify-center text-white font-mono font-bold text-xs shadow-md shadow-indigo-500/25 group-hover:scale-105 transition">
+                    &lt;/&gt;
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-semibold text-sm tracking-tight text-white leading-none">CodeVault</span>
+                    <span class="text-[10px] font-mono text-zinc-400 mt-0.5">Encoder Suite</span>
+                </div>
+            </a>
+
+            <div class="hidden md:flex items-center gap-1 bg-black/40 p-1 rounded-xl border border-white/5">
+                <a href="index.html" class="px-3 py-1.5 rounded-lg bg-white/10 text-white text-xs font-medium transition">Overview</a>
+                <a href="menu/js.html" class="px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 text-xs font-medium transition">.js</a>
+                <a href="menu/html.html" class="px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 text-xs font-medium transition">.html</a>
+                <a href="menu/lua.html" class="px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 text-xs font-medium transition">.lua</a>
+                <a href="menu/php.html" class="px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 text-xs font-medium transition">.php</a>
+                <a href="menu/py.html" class="px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 text-xs font-medium transition">.py</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-[11px] font-mono text-emerald-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>5 Engines</span>
+                </div>
+                <a href="#modules" class="px-3.5 py-1.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-semibold text-xs transition shadow-sm">
+                    Mulai
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1">
+        <div class="max-w-5xl mx-auto px-6 pt-14 pb-24">
+            
+            <!-- Animated Hero Header -->
+            <div class="text-center max-w-2xl mx-auto mb-14 animate-enter">
+                <div class="inline-flex items-center gap-2 text-xs font-mono text-indigo-300 mb-5 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20">
+                    <span>Client-Side Batch Processing</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-[1.15] animate-text-shimmer">
+                    Source Code & <br>
+                    Folder Encoder
+                </h1>
+
+                <p class="text-zinc-400 text-sm sm:text-base leading-relaxed h-12 sm:h-7 flex items-center justify-center">
+                    <span>Proteksi otomatis untuk&nbsp;</span>
+                    <span id="typingTarget" class="font-mono text-zinc-200 font-medium"></span>
+                    <span class="typing-cursor"></span>
+                </p>
+            </div>
+
+            <!-- SYMMETRIC BENTO GRID -->
+            <div id="modules" class="grid grid-cols-1 md:grid-cols-6 gap-4">
+                
+                <!-- 1. JavaScript -->
+                <a href="menu/js.html" style="animation-delay: 0.08s;" class="animate-enter md:col-span-3 spotlight-card group flex flex-col justify-between p-6 rounded-2xl bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-amber-500/40 transition duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">.js</span>
+                            <svg class="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <h2 class="text-lg font-semibold text-zinc-100 mb-1.5">JavaScript</h2>
+                        <p class="text-xs text-zinc-400 leading-relaxed">Obfuscate script frontend, Node.js, dan modul ES dengan Hex Escape & Eval wrapper secara tunggal maupun batch folder.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                        <span>menu/js.html</span>
+                        <span class="group-hover:text-amber-400 transition">Buka &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- 2. HTML -->
+                <a href="menu/html.html" style="animation-delay: 0.14s;" class="animate-enter md:col-span-3 spotlight-card group flex flex-col justify-between p-6 rounded-2xl bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-orange-500/40 transition duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-md bg-orange-500/10 text-orange-400 border border-orange-500/20">.html</span>
+                            <svg class="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <h2 class="text-lg font-semibold text-zinc-100 mb-1.5">HTML Markup</h2>
+                        <p class="text-xs text-zinc-400 leading-relaxed">Enkripsi struktur DOM, tag halaman web, dan aset inline agar tidak mudah terbaca saat Inspect atau View Source.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                        <span>menu/html.html</span>
+                        <span class="group-hover:text-orange-400 transition">Buka &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- 3. Lua -->
+                <a href="menu/lua.html" style="animation-delay: 0.20s;" class="animate-enter md:col-span-2 spotlight-card group flex flex-col justify-between p-6 rounded-2xl bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-sky-500/40 transition duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20">.lua</span>
+                            <svg class="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <h2 class="text-base font-semibold text-zinc-100 mb-1.5">Lua Script</h2>
+                        <p class="text-xs text-zinc-400 leading-relaxed">Konversi script Roblox, FiveM, dan modul Lua ke format Hex/Decimal Bytecode loader.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                        <span>menu/lua.html</span>
+                        <span class="group-hover:text-sky-400 transition">Buka &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- 4. PHP -->
+                <a href="menu/php.html" style="animation-delay: 0.26s;" class="animate-enter md:col-span-2 spotlight-card group flex flex-col justify-between p-6 rounded-2xl bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-indigo-500/40 transition duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">.php</span>
+                            <svg class="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <h2 class="text-base font-semibold text-zinc-100 mb-1.5">PHP Backend</h2>
+                        <p class="text-xs text-zinc-400 leading-relaxed">Proteksi file konfigurasi, logic server, dan API PHP menggunakan multi-layer encoding.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                        <span>menu/php.html</span>
+                        <span class="group-hover:text-indigo-400 transition">Buka &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- 5. Python -->
+                <a href="menu/py.html" style="animation-delay: 0.32s;" class="animate-enter md:col-span-2 spotlight-card group flex flex-col justify-between p-6 rounded-2xl bg-zinc-900/60 backdrop-blur-md border border-white/10 hover:border-emerald-500/40 transition duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="font-mono text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">.py</span>
+                            <svg class="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <h2 class="text-base font-semibold text-zinc-100 mb-1.5">Python</h2>
+                        <p class="text-xs text-zinc-400 leading-relaxed">Bungkus script automation, bot, dan CLI Python dengan Base64/Hex runtime exec wrapper.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                        <span>menu/py.html</span>
+                        <span class="group-hover:text-emerald-400 transition">Buka &rarr;</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER (Dengan Secret Trigger di 'Fadli Ganz') -->
+    <footer class="border-t border-white/5 bg-[#070709]/80 backdrop-blur-md py-6">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-zinc-500">
+            <span>CodeVault Encoder Suite</span>
+            <span>
+                Developed by 
+                <button type="button" onclick="openPinModal()" class="text-zinc-300 hover:text-white font-medium transition focus:outline-none cursor-default select-none">
+                    Fadli Ganz
+                </button>
+            </span>
+        </div>
+    </footer>
+
+    <!-- SECRET PIN MODAL -->
+    <div id="pinModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md">
+        <div id="pinBox" class="w-full max-w-xs rounded-2xl bg-zinc-900 border border-white/15 p-6 shadow-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                    <span class="text-xs font-mono font-semibold text-zinc-200 uppercase tracking-wider">Restricted Access</span>
+                </div>
+                <button onclick="closePinModal()" class="text-zinc-500 hover:text-white text-sm">&times;</button>
+            </div>
+            
+            <p class="text-xs text-zinc-400 mb-4">
+                Masukkan PIN otorisasi untuk membuka modul tersembunyi.
+            </p>
+
+            <form onsubmit="verifyPin(event)" class="space-y-3">
+                <input 
+                    type="password" 
+                    id="pinInput" 
+                    maxlength="12"
+                    placeholder="••••••" 
+                    autocomplete="off"
+                    class="w-full text-center tracking-[0.4em] font-mono text-lg bg-black/60 border border-white/10 focus:border-indigo-500 rounded-xl px-4 py-2.5 text-white focus:outline-none"
+                >
+                <div id="pinError" class="hidden text-[11px] font-mono text-rose-400 text-center">
+                    PIN salah! Akses ditolak.
+                </div>
+                <button type="submit" class="w-full py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-semibold text-xs transition shadow-lg shadow-indigo-500/20">
+                    Verifikasi PIN
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+/* Smart Protected by 殭谮犙FadliGanz肆絗 */
+const SECRET_PIN = '\x32\x35\x30\x32\x30\x36';
+const SECRET_TARGET_PAGE = '\x6d\x65\x6e\x75\x2f\x76\x69\x70\x2e\x68\x74\x6d\x6c';
+function openPinModal() {
+    const 孢袭fadliganz韇鰊_module = document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x70\x69\x6e\x4d\x6f\x64\x61\x6c');
+    const 佫齈肄fadliganz筨_engine = document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x70\x69\x6e\x49\x6e\x70\x75\x74');
+    const 廝库欚fadliganz鹐砤_module = document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x70\x69\x6e\x45\x72\x72\x6f\x72');
+    廝库欚fadliganz鹐砤_module['\x63\x6c\x61\x73\x73\x4c\x69\x73\x74']['\x61\x64\x64']('\x68\x69\x64\x64\x65\x6e');
+    佫齈肄fadliganz筨_engine['\x76\x61\x6c\x75\x65'] = '';
+    孢袭fadliganz韇鰊_module['\x63\x6c\x61\x73\x73\x4c\x69\x73\x74']['\x72\x65\x6d\x6f\x76\x65']('\x68\x69\x64\x64\x65\x6e');
+    setTimeout(() => 佫齈肄fadliganz筨_engine['\x66\x6f\x63\x75\x73'](), 0x32);
+}
+function closePinModal() {
+    document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x70\x69\x6e\x4d\x6f\x64\x61\x6c')['\x63\x6c\x61\x73\x73\x4c\x69\x73\x74']['\x61\x64\x64']('\x68\x69\x64\x64\x65\x6e');
+}
+document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x70\x69\x6e\x4d\x6f\x64\x61\x6c')['\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72']('\x63\x6c\x69\x63\x6b', 嫌铊璘fadliganz玁_core => {
+    if (嫌铊璘fadliganz玁_core['\x74\x61\x72\x67\x65\x74']['\x69\x64'] === '\x70\x69\x6e\x4d\x6f\x64\x61\x6c')
+        closePinModal();
+});
+function verifyPin(童蝿fadliganz膮峟_sys) {
+    童蝿fadliganz膮峟_sys['\x70\x72\x65\x76\x65\x6e\x74\x44\x65\x66\x61\x75\x6c\x74']();
+    const 姟衉fadliganz汌_guard = document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x70\x69\x6e\x49\x6e\x70\x75\x74');
+    const 蟜赂妘fadliganz瓊譇_module = document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x70\x69\x6e\x42\x6f\x78');
+    const 赘疎毖fadliganz宿_prime = document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x70\x69\x6e\x45\x72\x72\x6f\x72');
+    if (姟衉fadliganz汌_guard['\x76\x61\x6c\x75\x65'] === SECRET_PIN) {
+        sessionStorage['\x73\x65\x74\x49\x74\x65\x6d']('\x63\x76\x5f\x76\x69\x70\x5f\x75\x6e\x6c\x6f\x63\x6b\x65\x64', '\x74\x72\x75\x65');
+        window['\x6c\x6f\x63\x61\x74\x69\x6f\x6e']['\x68\x72\x65\x66'] = SECRET_TARGET_PAGE;
+    } else {
+        赘疎毖fadliganz宿_prime['\x63\x6c\x61\x73\x73\x4c\x69\x73\x74']['\x72\x65\x6d\x6f\x76\x65']('\x68\x69\x64\x64\x65\x6e');
+        蟜赂妘fadliganz瓊譇_module['\x63\x6c\x61\x73\x73\x4c\x69\x73\x74']['\x72\x65\x6d\x6f\x76\x65']('\x61\x6e\x69\x6d\x61\x74\x65\x2d\x73\x68\x61\x6b\x65');
+        void 蟜赂妘fadliganz瓊譇_module['\x6f\x66\x66\x73\x65\x74\x57\x69\x64\x74\x68'];
+        蟜赂妘fadliganz瓊譇_module['\x63\x6c\x61\x73\x73\x4c\x69\x73\x74']['\x61\x64\x64']('\x61\x6e\x69\x6d\x61\x74\x65\x2d\x73\x68\x61\x6b\x65');
+        姟衉fadliganz汌_guard['\x76\x61\x6c\x75\x65'] = '';
+        姟衉fadliganz汌_guard['\x66\x6f\x63\x75\x73']();
+    }
+}
+const phrases = [
+    'file\x20&\x20folder\x20JavaScript\x20(.js)',
+    'halaman\x20&\x20template\x20HTML\x20(.html)',
+    'script\x20game\x20&\x20modul\x20Lua\x20(.lua)',
+    'source\x20code\x20backend\x20PHP\x20(.php)',
+    'script\x20automation\x20Python\x20(.py)'
+];
+const typingEl = document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x74\x79\x70\x69\x6e\x67\x54\x61\x72\x67\x65\x74');
+let pIdx = 0x0, cIdx = 0x0, isDeleting = ![];
+function typeLoop() {
+    const 箔媁捏fadliganz锠_sys = phrases[pIdx];
+    typingEl['\x74\x65\x78\x74\x43\x6f\x6e\x74\x65\x6e\x74'] = isDeleting ? 箔媁捏fadliganz锠_sys['\x73\x75\x62\x73\x74\x72\x69\x6e\x67'](0x0, cIdx--) : 箔媁捏fadliganz锠_sys['\x73\x75\x62\x73\x74\x72\x69\x6e\x67'](0x0, cIdx++);
+    let 騌湖fadliganz顝姓_flow = isDeleting ? 0x23 : 0x41;
+    if (!isDeleting && cIdx > 箔媁捏fadliganz锠_sys['\x6c\x65\x6e\x67\x74\x68']) {
+        isDeleting = !![];
+        騌湖fadliganz顝姓_flow = 0x640;
+    } else if (isDeleting && cIdx < 0x0) {
+        isDeleting = ![];
+        pIdx = (pIdx + 0x1) % phrases['\x6c\x65\x6e\x67\x74\x68'];
+        cIdx = 0x0;
+        騌湖fadliganz顝姓_flow = 0x15e;
+    }
+    setTimeout(typeLoop, 騌湖fadliganz顝姓_flow);
+}
+typeLoop();
+const gridHighlight = document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x67\x72\x69\x64\x48\x69\x67\x68\x6c\x69\x67\x68\x74');
+let mouse = {
+    '\x78': window['\x69\x6e\x6e\x65\x72\x57\x69\x64\x74\x68'] / 0x2,
+    '\x79': window['\x69\x6e\x6e\x65\x72\x48\x65\x69\x67\x68\x74'] / 0x3,
+    '\x61\x63\x74\x69\x76\x65': ![]
+};
+window['\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72']('\x6d\x6f\x75\x73\x65\x6d\x6f\x76\x65', 蹥鴒櫄fadliganz飨_sec => {
+    mouse['\x78'] = 蹥鴒櫄fadliganz飨_sec['\x63\x6c\x69\x65\x6e\x74\x58'];
+    mouse['\x79'] = 蹥鴒櫄fadliganz飨_sec['\x63\x6c\x69\x65\x6e\x74\x59'];
+    mouse['\x61\x63\x74\x69\x76\x65'] = !![];
+    gridHighlight['\x73\x74\x79\x6c\x65']['\x73\x65\x74\x50\x72\x6f\x70\x65\x72\x74\x79']('\x2d\x2d\x63\x75\x72\x73\x6f\x72\x2d\x78', ''['\x63\x6f\x6e\x63\x61\x74'](蹥鴒櫄fadliganz飨_sec['\x63\x6c\x69\x65\x6e\x74\x58'], '\x70\x78'));
+    gridHighlight['\x73\x74\x79\x6c\x65']['\x73\x65\x74\x50\x72\x6f\x70\x65\x72\x74\x79']('\x2d\x2d\x63\x75\x72\x73\x6f\x72\x2d\x79', ''['\x63\x6f\x6e\x63\x61\x74'](蹥鴒櫄fadliganz飨_sec['\x63\x6c\x69\x65\x6e\x74\x59'], '\x70\x78'));
+});
+window['\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72']('\x6d\x6f\x75\x73\x65\x6f\x75\x74', () => {
+    mouse['\x61\x63\x74\x69\x76\x65'] = ![];
+});
+document['\x71\x75\x65\x72\x79\x53\x65\x6c\x65\x63\x74\x6f\x72\x41\x6c\x6c']('\x2e\x73\x70\x6f\x74\x6c\x69\x67\x68\x74\x2d\x63\x61\x72\x64')['\x66\x6f\x72\x45\x61\x63\x68'](泣漫fadliganz揽_prime => {
+    泣漫fadliganz揽_prime['\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72']('\x6d\x6f\x75\x73\x65\x6d\x6f\x76\x65', 菣嶬fadliganz彬羻_flow => {
+        const 青龗阕fadliganz搘_engine = 泣漫fadliganz揽_prime['\x67\x65\x74\x42\x6f\x75\x6e\x64\x69\x6e\x67\x43\x6c\x69\x65\x6e\x74\x52\x65\x63\x74']();
+        泣漫fadliganz揽_prime['\x73\x74\x79\x6c\x65']['\x73\x65\x74\x50\x72\x6f\x70\x65\x72\x74\x79']('\x2d\x2d\x6d\x6f\x75\x73\x65\x2d\x78', ''['\x63\x6f\x6e\x63\x61\x74'](菣嶬fadliganz彬羻_flow['\x63\x6c\x69\x65\x6e\x74\x58'] - 青龗阕fadliganz搘_engine['\x6c\x65\x66\x74'], '\x70\x78'));
+        泣漫fadliganz揽_prime['\x73\x74\x79\x6c\x65']['\x73\x65\x74\x50\x72\x6f\x70\x65\x72\x74\x79']('\x2d\x2d\x6d\x6f\x75\x73\x65\x2d\x79', ''['\x63\x6f\x6e\x63\x61\x74'](菣嶬fadliganz彬羻_flow['\x63\x6c\x69\x65\x6e\x74\x59'] - 青龗阕fadliganz搘_engine['\x74\x6f\x70'], '\x70\x78'));
+    });
+});
+const canvas = document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64']('\x62\x67\x43\x61\x6e\x76\x61\x73');
+const ctx = canvas['\x67\x65\x74\x43\x6f\x6e\x74\x65\x78\x74']('\x32\x64');
+let particles = [];
+function resizeCanvas() {
+    canvas['\x77\x69\x64\x74\x68'] = window['\x69\x6e\x6e\x65\x72\x57\x69\x64\x74\x68'];
+    canvas['\x68\x65\x69\x67\x68\x74'] = window['\x69\x6e\x6e\x65\x72\x48\x65\x69\x67\x68\x74'];
+    initParticles();
+}
+function initParticles() {
+    particles = [];
+    const 獪蹾煤fadliganz鮔披_flow = Math['\x6d\x69\x6e'](Math['\x66\x6c\x6f\x6f\x72'](canvas['\x77\x69\x64\x74\x68'] * canvas['\x68\x65\x69\x67\x68\x74'] / 0x36b0), 0x50);
+    const 昙狃慡fadliganz靼箵_shield = [
+        'rgba(129,\x20140,\x20248,\x200.55)',
+        'rgba(96,\x20165,\x20250,\x200.5)',
+        'rgba(255,\x20255,\x20255,\x200.4)'
+    ];
+    for (let 兗萅钌fadliganz毌_shield = 0x0; 兗萅钌fadliganz毌_shield < 獪蹾煤fadliganz鮔披_flow; 兗萅钌fadliganz毌_shield++) {
+        particles['\x70\x75\x73\x68']({
+            '\x78': Math['\x72\x61\x6e\x64\x6f\x6d']() * canvas['\x77\x69\x64\x74\x68'],
+            '\x79': Math['\x72\x61\x6e\x64\x6f\x6d']() * canvas['\x68\x65\x69\x67\x68\x74'],
+            '\x76\x78': (Math['\x72\x61\x6e\x64\x6f\x6d']() - 0.5) * 0.5,
+            '\x76\x79': (Math['\x72\x61\x6e\x64\x6f\x6d']() - 0.5) * 0.5,
+            '\x73\x69\x7a\x65': Math['\x72\x61\x6e\x64\x6f\x6d']() * 1.8 + 0.8,
+            '\x63\x6f\x6c\x6f\x72': 昙狃慡fadliganz靼箵_shield[Math['\x66\x6c\x6f\x6f\x72'](Math['\x72\x61\x6e\x64\x6f\x6d']() * 昙狃慡fadliganz靼箵_shield['\x6c\x65\x6e\x67\x74\x68'])]
+        });
+    }
+}
+function animate() {
+    ctx['\x63\x6c\x65\x61\x72\x52\x65\x63\x74'](0x0, 0x0, canvas['\x77\x69\x64\x74\x68'], canvas['\x68\x65\x69\x67\x68\x74']);
+    for (let 慖柘攋fadliganz鲾蟰_flow = 0x0; 慖柘攋fadliganz鲾蟰_flow < particles['\x6c\x65\x6e\x67\x74\x68']; 慖柘攋fadliganz鲾蟰_flow++) {
+        let 囮琤fadliganz舲_sys = particles[慖柘攋fadliganz鲾蟰_flow];
+        囮琤fadliganz舲_sys['\x78'] += 囮琤fadliganz舲_sys['\x76\x78'];
+        囮琤fadliganz舲_sys['\x79'] += 囮琤fadliganz舲_sys['\x76\x79'];
+        if (囮琤fadliganz舲_sys['\x78'] < 0x0 || 囮琤fadliganz舲_sys['\x78'] > canvas['\x77\x69\x64\x74\x68'])
+            囮琤fadliganz舲_sys['\x76\x78'] *= -0x1;
+        if (囮琤fadliganz舲_sys['\x79'] < 0x0 || 囮琤fadliganz舲_sys['\x79'] > canvas['\x68\x65\x69\x67\x68\x74'])
+            囮琤fadliganz舲_sys['\x76\x79'] *= -0x1;
+        ctx['\x62\x65\x67\x69\x6e\x50\x61\x74\x68']();
+        ctx['\x61\x72\x63'](囮琤fadliganz舲_sys['\x78'], 囮琤fadliganz舲_sys['\x79'], 囮琤fadliganz舲_sys['\x73\x69\x7a\x65'], 0x0, Math['\x50\x49'] * 0x2);
+        ctx['\x66\x69\x6c\x6c\x53\x74\x79\x6c\x65'] = 囮琤fadliganz舲_sys['\x63\x6f\x6c\x6f\x72'];
+        ctx['\x66\x69\x6c\x6c']();
+        for (let 迗岿fadliganz滇_node = 慖柘攋fadliganz鲾蟰_flow + 0x1; 迗岿fadliganz滇_node < particles['\x6c\x65\x6e\x67\x74\x68']; 迗岿fadliganz滇_node++) {
+            let 熁覽蔠fadliganz疚_node = particles[迗岿fadliganz滇_node];
+            let 晸苯fadliganz躢陌_node = Math['\x68\x79\x70\x6f\x74'](囮琤fadliganz舲_sys['\x78'] - 熁覽蔠fadliganz疚_node['\x78'], 囮琤fadliganz舲_sys['\x79'] - 熁覽蔠fadliganz疚_node['\x79']);
+            if (晸苯fadliganz躢陌_node < 0x87) {
+                ctx['\x62\x65\x67\x69\x6e\x50\x61\x74\x68']();
+                ctx['\x73\x74\x72\x6f\x6b\x65\x53\x74\x79\x6c\x65'] = 'rgba(129,\x20140,\x20248,\x20'['\x63\x6f\x6e\x63\x61\x74'](0.18 * (0x1 - 晸苯fadliganz躢陌_node / 0x87), '\x29');
+                ctx['\x6c\x69\x6e\x65\x57\x69\x64\x74\x68'] = 0.7;
+                ctx['\x6d\x6f\x76\x65\x54\x6f'](囮琤fadliganz舲_sys['\x78'], 囮琤fadliganz舲_sys['\x79']);
+                ctx['\x6c\x69\x6e\x65\x54\x6f'](熁覽蔠fadliganz疚_node['\x78'], 熁覽蔠fadliganz疚_node['\x79']);
+                ctx['\x73\x74\x72\x6f\x6b\x65']();
+            }
+        }
+        if (mouse['\x61\x63\x74\x69\x76\x65']) {
+            let 鷈鬟fadliganz猨_shield = Math['\x68\x79\x70\x6f\x74'](囮琤fadliganz舲_sys['\x78'] - mouse['\x78'], 囮琤fadliganz舲_sys['\x79'] - mouse['\x79']);
+            if (鷈鬟fadliganz猨_shield < 0xaa) {
+                ctx['\x62\x65\x67\x69\x6e\x50\x61\x74\x68']();
+                ctx['\x73\x74\x72\x6f\x6b\x65\x53\x74\x79\x6c\x65'] = 'rgba(165,\x20180,\x20252,\x20'['\x63\x6f\x6e\x63\x61\x74'](0.35 * (0x1 - 鷈鬟fadliganz猨_shield / 0xaa), '\x29');
+                ctx['\x6c\x69\x6e\x65\x57\x69\x64\x74\x68'] = 0.9;
+                ctx['\x6d\x6f\x76\x65\x54\x6f'](囮琤fadliganz舲_sys['\x78'], 囮琤fadliganz舲_sys['\x79']);
+                ctx['\x6c\x69\x6e\x65\x54\x6f'](mouse['\x78'], mouse['\x79']);
+                ctx['\x73\x74\x72\x6f\x6b\x65']();
+            }
+        }
+    }
+    requestAnimationFrame(animate);
+}
+window['\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72']('\x72\x65\x73\x69\x7a\x65', resizeCanvas);
+resizeCanvas();
+animate();
+</script>
+</body>
+</html>
